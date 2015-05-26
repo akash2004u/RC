@@ -1,4 +1,4 @@
-package com.practice.ds.stockspan;
+package com.practice.ds.stack.stockspan;
 
 public class StockSpan_Raw {
 	
