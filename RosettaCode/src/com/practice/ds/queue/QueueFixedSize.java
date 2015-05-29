@@ -20,43 +20,43 @@ public class QueueFixedSize<Type> implements Queue<Type> {
 	public void push(Type val) {
 		bombIfFull();
 		
-		rear++;
-		if(rear == this.store.length) {
-			rear = 0;
+		if(rear == this.store.length - 1){
+			rear = -1;
 		}
 		
-		this.store[rear] = val;
+		this.store[++rear] = val;
 	}
 
 	@Override
 	public Type peek() {
 		bombIfEmpty();
 		
-		return null;
+		return this.store[front];
 	}
 
 	@Override
 	public Type pop() {
 		bombIfEmpty();
 		
-		return null;
+		if(front == this.store.length || front == -1){
+			front = 0;
+		}
+		
+		return this.store[front++];
 	}
 
 	@Override
 	public int size() {
-		if(rear < front)
-			return this.store.length - front + rear;
-		else 
-			return front - rear;
+		return rear - front;
 	}
 	
 	private void bombIfFull() {
-		if(size() > this.store.length)
+		if(size() >= this.store.length)
 			throw new RuntimeException("Queue Full");
 	}
 	
 	private void bombIfEmpty() {
-		if(size() == 0)
+		if(size() == 0 )
 			throw new RuntimeException("Queue Empty");
 	}
 }
