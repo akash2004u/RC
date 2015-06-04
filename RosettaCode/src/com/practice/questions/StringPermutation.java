@@ -2,34 +2,28 @@ package com.practice.questions;
 
 public class StringPermutation {
 
+	static int count = 0;
 	
 	public static void main(String... args){
-		permute("abc");
+		permute("abdefghijklmnopqrstuvwxyz");
+		System.out.println("Combinations :"+count);
 	}
 	
 	static void permute(String val){
-		
-		permute(val.toCharArray(),0,val.length());
+		permute("",val);
 		
 	}
 	
-	static void permute(char[] str,int start,int end) {
+	static void permute(String prefix, String val){
+		if(val.length() == 0) {
+			System.out.println(prefix);
+			count ++;
+		}
 		
-		if(start == end)
-			System.out.println(str);
-		else {
-			for(int i = 0 ; i < str.length ; i++) {
-				swap(str,start,i);
-				permute(str,start,end);
-				swap(str,i ,start);
-			}
-		}		
-	}
-	
-	static void swap(char[] val,int i , int j) {
-		char c = val[i];
-		val[i] = val[j];
-		val[j] = c;
+		for(int i = 0 ; i < val.length() ; i++){
+			permute(prefix+val.charAt(i),val.substring(0,i)+val.substring(i+1));
+		}
+		
 	}
 	
 }
